@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H code to Atcode</title>
+    <script>
+        var onInput = null;
+        class HcodeConv{
+            constructor(){
+                this.form = null;
+                this.inValue = null;
+            }
+            init(){
+                this.form = document.querySelector('form[name=input]');
+                this.form.action = "javascript:onInput()";
+                onInput = this.onInput.bind(this);
+            }
+            onInput(){
+                this.inValue = this.form.querySelector('input').value;
+                console.log(`user inputted : ${inValue}`);
+                let isHRegex = /^\/H.*\@/gm;
+                let isHcode = isHRegex.test(inValue);
+                console.log(`is Hcode ? : ${isHcode}`);
+            }
+        };
+        window.onload =()=> new HcodeConv().init();
+        // /H{A|W|H}[data_offset[*drdo]][:sub_offset[*drso]][@addr][#level]
+        //-4 : EAX, -8 : ECX, -C : EDX, -10 : EBX, -14 : (ESP), -18 : EBP, -1C : ESI, -20 : EDI
+    </script>
+</head>
+<body>
+    <h1>
+        H code to Atcode.
+    </h1>
+    <form name="input">
+        <input type="text" name="code" id="" placeholder="Insert H code to Atcode.">
+        <button type="submit"></button>
+    </form>
+    
+</body>
+</html>
